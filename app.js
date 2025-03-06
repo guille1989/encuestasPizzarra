@@ -34,7 +34,7 @@ app.get('/api/encuestas', async (req, res) => {
 });
 
 // Ruta para guardar respuestas
-app.post('/responder', async (req, res) => {
+app.post('/api/responder', async (req, res) => {
     const { encuestaId, respuesta } = req.body;
     const nuevaRespuesta = new Respuesta({ encuestaId, respuesta });
     await nuevaRespuesta.save();

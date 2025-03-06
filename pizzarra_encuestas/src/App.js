@@ -30,6 +30,7 @@ export default function EncuestaApp() {
 
   useEffect(() => {
     axios.get(`http://${process.env.REACT_APP_URL_LOCAL}/api/encuestas`).then((res) => {
+      console.log(res.data)
       setEncuestas(res.data);
     });
   }, []);
