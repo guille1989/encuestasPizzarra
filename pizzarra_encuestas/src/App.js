@@ -29,7 +29,7 @@ export default function EncuestaApp() {
   const [mensaje, setMensaje] = useState("");
 
   useEffect(() => {
-    axios.get(`http://${process.env.REACT_APP_URL_LOCAL}/encuestas`).then((res) => {
+    axios.get(`http://${process.env.REACT_APP_URL_LOCAL}/api/encuestas`).then((res) => {
       setEncuestas(res.data);
     });
   }, []);
@@ -46,7 +46,7 @@ export default function EncuestaApp() {
   
     try {
       for (const [encuestaId, respuesta] of Object.entries(respuestas)) {
-        await axios.post(`http://${process.env.REACT_APP_URL_LOCAL}/responder`, { encuestaId, respuesta });
+        await axios.post(`http://${process.env.REACT_APP_URL_LOCAL}/api/responder`, { encuestaId, respuesta });
       }
       setMensaje("¡Respuestas enviadas!");
       localStorage.setItem("encuesta-respondida", "true");

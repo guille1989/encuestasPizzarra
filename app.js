@@ -28,7 +28,7 @@ const RespuestaSchema = new mongoose.Schema({
 const Respuesta = mongoose.model('Respuesta', RespuestaSchema);
 
 // Ruta para obtener encuestas
-app.get('/encuestas', async (req, res) => {
+app.get('/api/encuestas', async (req, res) => {
     const encuestas = await Encuesta.find();
     res.json(encuestas);
 });
@@ -42,7 +42,7 @@ app.post('/responder', async (req, res) => {
 });
 
 // Ruta para obtener estadísticas
-app.get('/estadisticas/:id', async (req, res) => {
+app.get('/api/estadisticas/:id', async (req, res) => {
     const respuestas = await Respuesta.find({ encuestaId: req.params.id });
     const conteo = respuestas.reduce((acc, { respuesta }) => {
         acc[respuesta] = (acc[respuesta] || 0) + 1;
