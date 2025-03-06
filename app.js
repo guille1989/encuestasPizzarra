@@ -1,10 +1,13 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const bodyParser = require("body-parser");
 
 const app = express();
-app.use(express.json());
 app.use(cors());
+app.use(bodyParser.json());
+app.use(express.json());
+app.use(express.urlencoded({extended:true}));
 
 // Conexión a MongoDB
 mongoose.connect('mongodb+srv://root:123@cluster0.jwxt0.mongodb.net/encuestas?retryWrites=true&w=majority', {})
