@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { set } from "mongoose";
 
 const STRING_CONECTION = "3.91.242.67:8082";
 
@@ -59,7 +60,7 @@ export default function EncuestaApp() {
   return (
     <div style={{ padding: "20px", maxWidth: "500px", margin: "0 auto" }}>
       <h1 style={{ fontSize: "1.5rem", fontWeight: "bold", marginBottom: "10px" }}>
-        Encuesta de Satisfacción
+        Encuesta de Satisfacción de la Pizzarra 100% Masa Madre
       </h1>
       {
       encuestas.map((encuesta) => (

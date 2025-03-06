@@ -23,7 +23,8 @@ const Encuesta = mongoose.model('Encuesta', EncuestaSchema);
 // Modelo de Respuesta
 const RespuestaSchema = new mongoose.Schema({
     encuestaId: mongoose.Schema.Types.ObjectId,
-    respuesta: String
+    respuesta: String,
+    fechaRespuesta: { type: Date, default: Date.now }
 });
 const Respuesta = mongoose.model('Respuesta', RespuestaSchema);
 
