@@ -28,8 +28,15 @@ export default function EncuestaApp() {
   const [encuestas, setEncuestas] = useState([]);
   const [respuestas, setRespuestas] = useState({});
   const [mensaje, setMensaje] = useState("");
+  const [fechaRespuesta, setFechaRespuesta] = useState("");
 
   useEffect(() => {
+    //setFechaRespuesta para saber si el cliente ya respondió la encuesta en format dd/mm/yyyy
+    const date = new Date();
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    setFechaRespuesta(`${day}/${month}/${year}`);
     axios.get(`http://${process.env.REACT_APP_URL_LOCAL}/api/encuestas`).then((res) => {
       console.log(res.data)
       setEncuestas(res.data);
@@ -41,7 +48,7 @@ export default function EncuestaApp() {
   };
 
   const enviarRespuestas = async () => {
-    if (localStorage.getItem("encuesta-respondida")) {
+    if (localStorage.getItem("encuesta-respondida") === fechaRespuesta) {
       alert("Ya has respondido esta encuesta.");
       return;
     }
@@ -51,7 +58,7 @@ export default function EncuestaApp() {
         await axios.post(`http://${process.env.REACT_APP_URL_LOCAL}/api/responder`, { encuestaId, respuesta });
       }
       setMensaje("¡Respuestas enviadas!");
-      localStorage.setItem("encuesta-respondida", "true");
+      localStorage.setItem("encuesta-respondida", fechaRespuesta);
     } catch (error) {
       console.error("Error al enviar respuestas", error);
     }
